@@ -31,7 +31,6 @@ public class AddressesPage extends MenuBarPage {
 
 	@Step("Get the number of addresses")
 	public int numberOFaddresses() {
-		sleep(500);
 		int n = totalListOfAddresses.size();
 		return n;
 	}
