@@ -31,6 +31,7 @@ public class AddressesPage extends MenuBarPage {
 
 	@Step("Get the number of addresses")
 	public int numberOFaddresses() {
+		waitForListBeSeen(totalListOfAddresses);
 		int n = totalListOfAddresses.size();
 		return n;
 	}
@@ -39,7 +40,6 @@ public class AddressesPage extends MenuBarPage {
 	public void deleteAddress(int count) {
 		if (deleteBtn.size() > 1) {
 			click(deleteBtn.get(count -1 ));
-			sleep(500);
 			alertOK();
 		}
 	}
