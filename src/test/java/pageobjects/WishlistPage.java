@@ -45,7 +45,6 @@ public class WishlistPage extends MenuBarPage {
 		}else if (numOfWishlists() >= 1) { // if there is ine or more lists
 			if (num <= listOfWishlists.size()) { 
 				for (int i = 0; i < listOfWishlists.size(); i++) {
-					sleep(500); //remove later
 					click(listOfWishlists.get(num -1));
 				}
 			}
@@ -67,7 +66,6 @@ public class WishlistPage extends MenuBarPage {
 		}
 	}
 
-
 	//validation
 	@Step("Get number of wishlists")
 	public int numOfWishlists() {
@@ -78,8 +76,12 @@ public class WishlistPage extends MenuBarPage {
 
 	@Step("Get number of items")
 	public int numOfItemsInList() {
-		sleep(1000); 
-		int m = deleteItemIcon.size();
+		int m;
+		if (deleteItemIcon.size() > 0) {
+			m = 0;
+		} else {
+			m = deleteItemIcon.size();
+		}
 		return m;
 	}
 

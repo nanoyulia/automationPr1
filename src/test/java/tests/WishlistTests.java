@@ -2,18 +2,19 @@ package tests;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import io.qameta.allure.Description;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
 import pageobjects.AuthenticationPage;
+import pageobjects.Blouse1Page;
+import pageobjects.BlousesPage;
 import pageobjects.DressesPage;
 import pageobjects.IndexPage;
 import pageobjects.MyAccountPage;
 import pageobjects.WishlistPage;
 
 public class WishlistTests extends BaseTest {
-
+	
 	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "add items to wishlist while not logged")
 	@Description ("Attempt to add item to wishlist as guest")
@@ -24,12 +25,13 @@ public class WishlistTests extends BaseTest {
 
 		//add to wishlist dresses with the word 'summer' in name
 		DressesPage dp = new DressesPage(driver);
-		String actual = dp.addToWishlist("summer");
+		String actual = dp.addToWishlist(1);
 
 		//error message should appear
 		String expected  = "You must be logged in to manage your wishlist.";
 		Assert.assertEquals(actual, expected);
 	}
+	
 
 	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "add items to wishlist after login")
@@ -49,10 +51,11 @@ public class WishlistTests extends BaseTest {
 
 		//add to wishlist dresses with the word 'summer' in name
 		dp = new DressesPage(driver);
-		String actual = dp.addToWishlist("summer");
+		String actual = dp.addToWishlist(1);
 
 		//error message should appear
 		String expected  = "Added to your wishlist.";
+		System.out.println(actual);
 		Assert.assertEquals(actual, expected);
 	}
 
@@ -60,7 +63,6 @@ public class WishlistTests extends BaseTest {
 	@Test (description = "View wishlist")
 	@Description ("View specific wishlist")
 	public void tc16_viewWishlist() {
-		//go  to user account page
 		DressesPage dp = new DressesPage(driver);
 		dp.clickMyAccountLink();
 

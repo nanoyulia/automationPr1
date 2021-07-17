@@ -1,8 +1,10 @@
 package pageobjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 import io.qameta.allure.Step;
@@ -54,7 +56,6 @@ public class Blouse1Page extends MenuBarPage {
 		size.selectByVisibleText(sizeText.toUpperCase());
 		click(whitecolorIcon);
 		click(addBlouseTocart);
-		sleep(1000);
 		click(closeIcon);
 	}
 

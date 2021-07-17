@@ -23,7 +23,7 @@ public class CheckoutTest extends BaseTest {
 	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "trying to checkout an empty cart")
 	@Description ("Attemp to chechkout without adding atiems")
-	public void tc31_checkoutEmpty() {
+	public void tc30_checkoutEmpty() {
 		//go to cart
 		IndexPage ip = new IndexPage(driver);
 		ip.clickOnCartLink();
@@ -39,7 +39,7 @@ public class CheckoutTest extends BaseTest {
 	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "can't checkout without checking terms of condition")
 	@Description ("Try to checkout without clicking the checkbox with terms")
-	public void tc32_checkout() {
+	public void tc31_checkout() {
 		//go to shirt category
 		CartPage cp = new CartPage(driver);
 		cp.goToTshirtCategory();
@@ -83,7 +83,7 @@ public class CheckoutTest extends BaseTest {
 	@Severity(SeverityLevel.CRITICAL)
 	@Test (description = "check terms and go to checkout, pay with bankwire")
 	@Description ("Successful checkout after clicking the checkbox")
-	public void tc33_completePurchase() {
+	public void tc32_completePurchase() {
 		//click on checkbox
 		OrderShippingPage osp = new OrderShippingPage(driver);
 		osp.checkTerms();
@@ -111,7 +111,7 @@ public class CheckoutTest extends BaseTest {
 	@Severity(SeverityLevel.CRITICAL)
 	@Test (description = "another purchase")
 	@Description ("Successful checkout with different paying method")
-	public void tc34_completePurchase() {
+	public void tc33_completePurchase() {
 		//go to dresses category
 		OrderConfirmationPage ocp = new OrderConfirmationPage(driver);
 		ocp.goTodressesCategory();

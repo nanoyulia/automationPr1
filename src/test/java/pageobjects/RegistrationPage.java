@@ -78,7 +78,6 @@ public class RegistrationPage extends MenuBarPage {
 		//fill date of birth
 		Select d = new Select(days);
 		d.selectByValue(dayValue);
-		sleep(1000);
 		Select m = new Select(months);
 		m.selectByValue(monthValue);
 		Select y = new Select(year);

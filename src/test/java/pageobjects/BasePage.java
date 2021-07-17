@@ -29,7 +29,6 @@ public class BasePage {
 	public void fillText(WebElement el,String text) {
 		el.clear();
 		el.sendKeys(text);
-		sleep(1000);
 	}
 
 	public void click(WebElement el) {
@@ -72,6 +71,10 @@ public class BasePage {
 
 	public void refreshPage() {
 		driver.navigate().refresh();
+	}
+	
+	public void goToPreviousPage() {
+		driver.navigate().back();
 	}
 
 	public void sleep(long mills) {
@@ -124,8 +127,13 @@ public class BasePage {
 
 	//mouse hover
 	public void mouseHoverTo (WebElement el) {
-		sleep(500);
+		waitToBeSeen(el);
 		actions.moveToElement(el).build().perform();
+	}
+	
+	//scroll to element 
+	public void scrollTo(WebElement el) {
+		actions.moveToElement(el);
 	}
 
 

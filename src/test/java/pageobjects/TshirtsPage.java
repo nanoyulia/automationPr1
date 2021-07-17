@@ -36,9 +36,8 @@ public class TshirtsPage extends MenuBarPage {
 		click(quickViewLink);
 		switchToFrame(frameElement);
 		for (int i = 0; i < (quantity -1); i++) {
-			sleep(500);
+			waitToBeClickable(inFramePlusIcon);
 			click(inFramePlusIcon);
-			sleep(500);
 		}
 		Select size = new Select(inFrameSelectSize);
 		size.selectByVisibleText(sizeText.toUpperCase());

@@ -2,9 +2,11 @@ package pageobjects;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import io.qameta.allure.Step;
 
@@ -31,7 +33,7 @@ abstract class MenuBarPage extends BasePage {
 	@FindBy (css = ".submenu-container [title = 'Blouses']")
 	private WebElement blousesLink;
 	@FindBy (css = ".shopping_cart>a")
-	private WebElement viewCartLink;
+	protected WebElement viewCartLink;
 	@FindBy (css = ".cart-images")
 	private List<WebElement> itemsInCart;
 	@FindBy (css = ".ajax_cart_block_remove_link")
@@ -61,31 +63,26 @@ abstract class MenuBarPage extends BasePage {
 	@Step("Click 'sign in' link")
 	public void clickSigninLink() {
 		click(signInLink);
-		sleep(500);
 	}
 
 	@Step("Click 'contact us' link")
 	public void clickContactUsLink() {
 		click(contactUsLink);
-		sleep(500);
 	}
 
 	@Step("Click 'sign out' link")
 	public void clickSignoutLink() {
 		click(signoutLink);
-		sleep(500);
 	}
 
 	@Step("Click 'my account' link")
 	public void clickMyAccountLink() {
 		click(myAccLink);
-		sleep(500);
 	}
 
 	@Step("Click on cart link")
 	public void clickOnCartLink() {
 		click(viewCartLink);
-		sleep(500);
 	}
 
 	@Step("Click 'blouses' link")
@@ -121,8 +118,13 @@ abstract class MenuBarPage extends BasePage {
 
 	@Step("Type in email: {email} and submit")
 	public void subscribeToNews(String email) {
+		scrollTo(newsletterEmailField);
 		fillText(newsletterEmailField, email);
 		click(submitNewsletterBtn);
+		if (!doesUrlInclude("automation")) {
+			goToPreviousPage();
+			wait.until(ExpectedConditions.urlContains("automation"));
+		}
 	}
 
 	@Step("Typre in product description: {productName}")
@@ -135,8 +137,8 @@ abstract class MenuBarPage extends BasePage {
 	//validation
 	@Step("Get the quantity of items in the cart")
 	public int getCartQuantity() {
+		waitToBeSeen(viewCartLink);
 		if (cartQuantity.isDisplayed()) {
-			sleep(500);
 			String s = getText(cartQuantity);
 			int n = Integer.parseInt(s);
 			return n;

@@ -2,9 +2,11 @@ package pageobjects;
 
 import java.util.List;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import io.qameta.allure.Step;
 
@@ -12,9 +14,9 @@ public class DressesPage extends MenuBarPage {
 
 	@FindBy (css = ".icon-eye-open")
 	private List<WebElement> quickViewIcon;
-	@FindBy (css = ".quick-view")
+	@FindBy (css = ".quick-view>span")
 	private List<WebElement> quickViewLink;
-	@FindBy (css = ".add_to_compare")
+	@FindBy (css = ".compare>a")
 	private List<WebElement> addToCompareBtns;
 	@FindBy (css = ".button.ajax_add_to_cart_button.btn.btn-default")
 	private List<WebElement> addToCartBtns;
@@ -28,7 +30,7 @@ public class DressesPage extends MenuBarPage {
 	private WebElement closeMsg;
 	@FindBy (css = ".wishlist >a")
 	private List<WebElement> addToWishLinks ;
-	@FindBy (css = ".left-block .replace-2x.img-responsive")
+	@FindBy (css = ".product_img_link")
 	private List<WebElement> dressesPics;
 	@FindBy (css = ".product_list.grid.row .product-name")
 	private List<WebElement> dressesNames;
@@ -51,47 +53,53 @@ public class DressesPage extends MenuBarPage {
 	@Step("Add all items to cart")
 	public void addAllDressesToCart() {
 		for (int i = 0; i < dressesPics.size(); i++) {
+			scrollTo(dressesPics.get(i));
 			mouseHoverTo(dressesPics.get(i));
 			click(quickViewLink.get(i));
 			switchToFrame(frameElement);
 			click(addToCartInFrame);
 			click(continueBtnInFrame);
 			switchBackFromFrame();
+			waitToBeSeen(viewCartLink);
 		}
 	}
 
 	@Step("Add item: {itemName} to wishlist")
-	public String addToWishlist(String itemName) {
+	public String addToWishlist(int itemNumb) {
+		waitForListBeSeen(dressesPics);
+		click(driver.findElement(By.cssSelector("#list>a")));
+		waitForListBeSeen(addToWishLinks);
 		String s = null;
-		for (int i = 0; i < dressesNames.size()-1; i++) {
-			if (getText(dressesNames.get(i)).toLowerCase().contains(itemName)) {
-				mouseHoverTo(dressesNames.get(i));
-				waitToBeSeen(addToWishLinks.get(i));
-				click(addToWishLinks.get(i));
-				waitToBeSeen(textAlert);
-				if (getAlertText().equalsIgnoreCase("You must be logged in to manage your wishlist.")) {
-					s = getAlertText();
-					click(closeMsg);
-					break;
-				} else if(getAlertText().equalsIgnoreCase("Added to your wishlist.")) {
-					s = getAlertText();
-					click(closeMsg);
-					waitForListBeSeen(dressesNames);
-				}
-			}
+
+		scrollTo(driver.findElements(By.cssSelector(".product-container")).get(itemNumb-1));
+		click(addToWishLinks.get(itemNumb-1));
+		waitToBeSeen(textAlert);
+		if (getAlertText().equalsIgnoreCase("You must be logged in to manage your wishlist.")) {
+			s = getAlertText();
+			click(closeMsg);
+			return s;
+		} else if(getAlertText().equalsIgnoreCase("Added to your wishlist.")) {
+			s = getAlertText();
+			click(closeMsg);
+			return s;
 		}
 		return s;
 	}
 
+
+
+
 	@Step("Add item number:{n} to comparison list")
 	public void addToCompare(int n) {
-		if (n <= addToCompareBtns.size()-1) {
-			waitForListBeSeen(dressesNames);
-			mouseHoverTo(dressesNames.get(n-1));
-			click(addToCompareBtns.get(n-1));
-			sleep(1000); 
-		}	
-	}
+		waitForListBeSeen(dressesPics);
+		click(driver.findElement(By.cssSelector("#list>a")));
+		waitForListBeSeen(addToCompareBtns);
+		
+		scrollTo(addToCompareBtns.get(n-1));
+		click(addToCompareBtns.get(n-1));
+		wait.until(ExpectedConditions.attributeContains(addToCompareBtns.get(n-1), "class", "add_to_compare checked"));
+
+	}	
 
 	@Step("Get alert text")
 	public String getAlertText() {
@@ -125,7 +133,7 @@ public class DressesPage extends MenuBarPage {
 
 	@Step("Get the quantity of items to compare")
 	public int numOfItemsToCompare() {
-		sleep(1000);
+		waitToBeSeen(totalItemsToCompare);
 		int t = Integer.parseInt(totalItemsToCompare.getText());
 		return t;
 	}

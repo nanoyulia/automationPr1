@@ -185,12 +185,11 @@ public class ProductsTests extends BaseTest {
 		blp.clockCloseAlert();
 
 		Assert.assertEquals(actual, expected);
-
 	}
 
 	@Severity(SeverityLevel.NORMAL)
-	@Test (description = "add one product to comparison list")
-	@Description ("Add one item to comparison list")
+	@Test (description = "add product to comparison list")
+	@Description ("Add item to comparison list")
 	public void tc25_addToCompare( ) {
 		Blouse1Page blp = new Blouse1Page(driver);
 		blp.goTodressesCategory();
@@ -205,22 +204,4 @@ public class ProductsTests extends BaseTest {
 		Assert.assertEquals(actual, expected);		
 	}
 
-	@Severity(SeverityLevel.NORMAL)
-	@Test (description = "add more items than allowed to compare")
-	@Description ("Add more items to comparison list")
-	public void tc26_addMoreToCompare() {
-		//add three more items to comparison list
-		DressesPage dp = new DressesPage(driver);
-		dp.addToCompare(4);
-		dp = new DressesPage(driver);
-		dp.addToCompare(3);
-		dp = new DressesPage(driver);
-		dp.addToCompare(1);
-
-		//alert should pop up
-		dp = new DressesPage(driver);
-		String actual = dp.getAlertText();
-		String expected = "You cannot add more than 3 product(s) to the product comparison";
-		Assert.assertEquals(actual, expected);	
-	}
 }

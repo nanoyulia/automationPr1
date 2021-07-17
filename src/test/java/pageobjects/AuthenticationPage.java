@@ -36,7 +36,6 @@ public class AuthenticationPage extends MenuBarPage {
 		fillText(emailField, emailText);
 		fillText(passwordField, passwdText);
 		click(submitBtn);
-		sleep(1000);
 	}
 
 	@Step("Get error message")
@@ -48,7 +47,6 @@ public class AuthenticationPage extends MenuBarPage {
 	public void createAccount(String mailField) {
 		fillText(createUserEmail, mailField);
 		click(createAccSubmit);
-		sleep(2000);
 	}
 
 	@Step("Get error message")
@@ -60,6 +58,5 @@ public class AuthenticationPage extends MenuBarPage {
 	@Step("Click 'forgot password' link")
 	public void clickForgotPswdLink() {
 		click(forgotPswdLink);
-		sleep(1000);
 	}
 }

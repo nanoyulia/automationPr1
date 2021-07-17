@@ -44,6 +44,5 @@ public class ForgotPswdPage extends MenuBarPage {
 	@Step("Click back to login page")
 	public void clickBackToLogin() {
 		click(backToLoginBtn);
-		sleep(500);
 	}
 }

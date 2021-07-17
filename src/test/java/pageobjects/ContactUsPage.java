@@ -38,9 +38,7 @@ public class ContactUsPage extends MenuBarPage {
 		if (s.isEmpty()) {
 			fillText(emailField, emailText);
 		} 
-		sleep(500); //remove later
 		if (orderReference.getTagName().equalsIgnoreCase("input")) {
-			sleep(500); //remove later
 			fillText(orderReference, "----");
 		} else  {
 			Select s1 = new Select(orderReference);

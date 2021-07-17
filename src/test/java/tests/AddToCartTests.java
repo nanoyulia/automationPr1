@@ -17,7 +17,7 @@ public class AddToCartTests extends BaseTest {
 	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "adding all the dresses to cart at dresses page")
 	@Description ("Adding all the items to cart at Dresses page")
-	public void tc27_addDresses() {
+	public void tc26_addDresses() {
 		//go to dresses category
 		IndexPage ip = new IndexPage(driver);
 		ip.goTodressesCategory();
@@ -45,7 +45,7 @@ public class AddToCartTests extends BaseTest {
 	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "adding blouse to cart at product page")
 	@Description ("Adding one iten to cart at Blouses page")
-	public void tc28_addBlouse() {
+	public void tc27_addBlouse() {
 		//go to blouse category
 		DressesPage dp = new DressesPage(driver);
 		dp.goToBlouseCategory();
@@ -72,7 +72,7 @@ public class AddToCartTests extends BaseTest {
 	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "adding t-shirt")
 	@Description ("Adding one item and changing the size and quantity")
-	public void tc29_addShirt() {
+	public void tc28_addShirt() {
 		//go to t-chirt category
 		Blouse1Page blp = new Blouse1Page(driver);
 		blp.goToTshirtCategory();
@@ -95,7 +95,7 @@ public class AddToCartTests extends BaseTest {
 	@Severity(SeverityLevel.NORMAL)
 	@Test (description = "remove all items without going to the cart page")
 	@Description ("Delete all the items by clicking floating cart menu")
-	public void tc30_deleteItems() {
+	public void tc29_deleteItems() {
 		//hover over a cart icon and delete all items
 		TshirtsPage tp = new TshirtsPage(driver);
 		tp = new TshirtsPage(driver);
@@ -104,7 +104,6 @@ public class AddToCartTests extends BaseTest {
 
 		//check that cart is empty
 		int actual = tp.getCartQuantity();
-		System.out.println(actual);
 		int expected = 0;
 		Assert.assertEquals(actual, expected);
 	}
