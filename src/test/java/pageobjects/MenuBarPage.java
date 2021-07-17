@@ -2,7 +2,6 @@ package pageobjects;
 
 import java.util.List;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -33,7 +32,7 @@ abstract class MenuBarPage extends BasePage {
 	@FindBy (css = ".submenu-container [title = 'Blouses']")
 	private WebElement blousesLink;
 	@FindBy (css = ".shopping_cart>a")
-	protected WebElement viewCartLink;
+	private WebElement viewCartLink;
 	@FindBy (css = ".cart-images")
 	private List<WebElement> itemsInCart;
 	@FindBy (css = ".ajax_cart_block_remove_link")

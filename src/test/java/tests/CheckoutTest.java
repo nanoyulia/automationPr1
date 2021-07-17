@@ -155,6 +155,4 @@ public class CheckoutTest extends BaseTest {
 		String expected = "Your order on My Store is complete.";
 		Assert.assertEquals(actual, expected);
 	}
-
-
 }

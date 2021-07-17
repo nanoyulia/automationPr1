@@ -44,6 +44,8 @@ public class DressesPage extends MenuBarPage {
 	private WebElement addedProductConfirmation;
 	@FindBy (css = ".cross")
 	private WebElement closeAddedProductConfirmation;
+	@FindBy (css = ".shopping_cart>a")
+	private WebElement viewCartLink;
 
 	//constructor
 	public DressesPage(WebDriver driver) {
